@@ -35,57 +35,46 @@ This template provides everything you need to build applications using AI agents
 
 ### Prerequisites
 
-- [uv](https://docs.astral.sh/uv/) - Python package manager
 - [Claude Code CLI](https://claude.com/claude-code) - AI coding assistant
 - Git
 
-### Installation
+### Installation (Clone & Go!)
 
-1. **Clone this template:**
-   ```bash
-   git clone https://github.com/gal099/agentic-dev-bootstrap.git
-   cd agentic-dev-bootstrap
-   ```
+Simply clone this repository into your new project directory:
 
-2. **Run interactive setup:**
-   ```bash
-   ./init.sh
-   ```
+```bash
+# Create your new project
+mkdir my-new-project
+cd my-new-project
 
-3. **Answer a few questions:**
-   - Project name and type
-   - Which features you need
-   - Whether to enable security hooks
-   - Whether to enable multi-agent capabilities
+# Clone the bootstrap template (dot at the end clones into current dir)
+git clone https://github.com/gal099/agentic-dev-bootstrap.git .
 
-The script will:
-- Copy the appropriate files to your project
-- Configure settings based on your choices
-- Set up dependencies
-- Initialize git if needed
+# Remove the git history to start fresh
+rm -rf .git
+git init
 
-### Manual Setup
+# You're ready! Start with architecture design
+claude -p "/architect" -- "Your project idea here"
+```
 
-If you prefer manual setup:
+That's it! The template is ready to use immediately.
 
-1. **Copy core files to your project:**
-   ```bash
-   cp -r core/.claude your-project/
-   cp -r core/adws your-project/
-   ```
+### What You Get
 
-2. **Install dependencies:**
-   ```bash
-   cd your-project
-   uv init --python 3.12
-   uv add pydantic
-   ```
+After cloning, your project has:
 
-3. **Optional: Add security hooks:**
-   ```bash
-   cp advanced/hooks/*.py your-project/.claude/hooks/
-   # Update .claude/settings.json with hooks configuration
-   ```
+```
+my-new-project/
+├── .claude/
+│   ├── commands/      # All slash commands including /architect and /scaffold
+│   └── settings.json
+├── adws/              # Workflow automation scripts
+├── agents/            # Agent execution tracking (empty initially)
+├── specs/             # Implementation plans (empty initially)
+├── docs/              # Documentation (empty initially)
+└── README.md
+```
 
 ## 📖 Usage
 
@@ -131,36 +120,42 @@ This will:
 
 ### Directory Structure
 
+After cloning, your project structure:
+
 ```
 your-project/
 ├── .claude/
 │   ├── commands/          # Slash command templates
+│   │   ├── architect.md   # 🆕 Bootstrap: Architecture design
+│   │   ├── scaffold.md    # 🆕 Bootstrap: Project scaffolding
 │   │   ├── prime.md
 │   │   ├── feature.md
 │   │   ├── bug.md
-│   │   ├── chore.md
 │   │   ├── implement.md
 │   │   └── ...
-│   ├── hooks/            # Security & monitoring (optional)
-│   │   ├── pre_tool_use.py
-│   │   └── post_tool_use.py
 │   └── settings.json      # Claude Code configuration
 │
 ├── adws/                  # Workflow orchestration
-│   ├── adw_modules/      # Core modules
-│   │   ├── agent.py      # Claude execution
-│   │   ├── state.py      # State management
-│   │   ├── git_ops.py    # Git operations
-│   │   └── data_types.py # Type definitions
-│   └── adw_plan_build.py # Example workflow
+│   ├── adw_modules/       # Core modules
+│   │   ├── agent.py       # Claude execution
+│   │   ├── state.py       # State management
+│   │   ├── git_ops.py     # Git operations
+│   │   └── data_types.py  # Type definitions
+│   └── adw_plan_build.py  # Example workflow
 │
-├── agents/               # Workflow execution data
+├── agents/                # Workflow execution data (created during use)
 │   └── {adw_id}/
 │       ├── adw_state.json
 │       └── planner/
 │
-└── specs/                # Implementation plans
-    └── plan-{adw_id}-{name}.md
+├── specs/                 # Implementation plans (created during use)
+│   └── plan-{adw_id}-{name}.md
+│
+└── docs/                  # Architecture docs (created by /architect)
+    ├── PRD.md
+    ├── ARCHITECTURE.md
+    ├── TECH_STACK.md
+    └── DATA_MODEL.md
 ```
 
 ### Core Concepts
